@@ -117,3 +117,21 @@ def createFund(current_user):
         db.session.add(fund)
         db.session.commit()
     return fund.serialize
+
+@app.route("/funds/<id>", methods=["POST"])
+@token_required
+def updateFund(current_user, id):
+    try:
+        funds = Funds.query.filter_by(userId=current_user.id, id=id).first()
+        if funds == None:
+            return make_response({"Message": "Unable to update"})
+        data = request.json
+        amount = data.get("amount")
+        if amount:
+            funds.amount = amount
+        db.session.commit()
+        return make_response({"message": funds.serialize}, 200)
+    except Exception as e:
+        print(e)
+        return make_response({"Message": "Unable to update"}, 409)
+    
