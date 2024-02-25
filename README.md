@@ -18,10 +18,10 @@ Tools - Postman
 
 Features: Uses JWT tokens to authenticate amendmentments/deletions
 
-# Sign up
+# Sign up 
 ![signup](https://github.com/ronaldkwan93/API_funds/assets/132134496/db5412d1-26bd-4c4c-9155-e23456157110)
 
-# Login
+# Login - Provides JWT that is used throughout all endpoints
 ![login](https://github.com/ronaldkwan93/API_funds/assets/132134496/d9ea5416-7219-41ef-977c-f0e901b8b3c9)
 
 # Post Fund
