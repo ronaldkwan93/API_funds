@@ -1,5 +1,6 @@
 from . import db
 from sqlalchemy.sql import func
+from datetime import datetime
 
 class Users(db.Model):
     __tablename__ = "Users"
@@ -8,7 +9,7 @@ class Users(db.Model):
     lastName = db.Column(db.String(200), nullable=False)
     password = db.Column(db.String(250), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    created_at = db.Column(db.DateTime(timezone=True), server_Default=func.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
     funds = db.relationship('Funds', backref="Users")
 
     def __repr__(self):
@@ -19,7 +20,7 @@ class Funds(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     amount = db.Column(db.Numeric(10,2))
     userId = db.Column(db.Integer, db.ForeignKey("Users.id"))
-    created_at = db.Column(db.DateTime(timezone=True), server_Default=func.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
 
     @property
     def serialize(self):

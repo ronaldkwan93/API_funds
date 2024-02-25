@@ -118,7 +118,7 @@ def createFund(current_user):
         db.session.commit()
     return fund.serialize
 
-@app.route("/funds/<id>", methods=["POST"])
+@app.route("/funds/<id>", methods=["PUT"])
 @token_required
 def updateFund(current_user, id):
     try:
