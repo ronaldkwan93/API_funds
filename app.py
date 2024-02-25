@@ -135,3 +135,16 @@ def updateFund(current_user, id):
         print(e)
         return make_response({"Message": "Unable to update"}, 409)
     
+@app.route("/funds/<id>", methods=["DELETE"])
+@token_required
+def deleteFund(current_user, id):
+    try:
+        fund = Funds.query.filter_by(userId=current_user.id, id=id).first()
+        if fund == None:
+            return make_response({"Message": f"Fund with {id} not found"}, 404)
+        db.session.delete(fund)
+        db.session.commit()
+        return make_response({"message": "Deleted"}, 200)
+    except Exception as e:
+        print(e)
+        return make_response({"Message": "Unable to process"}, 409)
